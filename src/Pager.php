@@ -26,7 +26,7 @@ class Pager {
 	 */
 	public $paginate				= true; // whether to even paginate or not
 	public $current_page			= 1; // current page
-	public $query_skip				= 0;
+	public $query_skip				= 0; // the skip step to be passed into queries
 	public $result_count			= 0; // how many results we're paginating
 	public $min_page				= 1; // min page of all pages
 	public $max_page				= 1; // max page (i.e. results / results per page)
