@@ -1,0 +1,28 @@
+{
+	"name": "volnix/paginate",
+	"description": "A simple pagination library that is easily extensible for custom pagination operations.",
+	"homepage": "https://github.com/volnix/paginate",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Nick Volgas",
+			"email": "n.volgas@gmail.com"
+		}
+	],
+	"autoload":{
+		"psr-4":{
+			"Volnix\\Paginate\\": "src/",
+			"Volnix\\Paginate\\Tests\\": "tests/"
+		}
+	},
+
+	"require": {
+		"php": ">= 5.4"
+	},
+
+	"require-dev": {
+		"phpunit/phpunit": "3.7.*"
+	},
+
+	"minimum-stability": "dev"
+}
