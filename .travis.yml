@@ -11,11 +11,7 @@ before_script:
   - composer install
 
 script:
-  - mkdir -p build/logs
-  - phpunit --coverage-clover build/logs/clover.xml --coverage-text
-
-after_script:
-  - php vendor/bin/coveralls -v
+  - phpunit --coverage-text
 
 matrix:
   allow_failures:

@@ -1,6 +1,6 @@
 # Paginate
 
-[![Build Status](https://travis-ci.org/volnix/paginate.png?branch=master)](https://travis-ci.org/volnix/paginate) [![Total Downloads](https://poser.pugx.org/volnix/paginate/downloads.png)](https://packagist.org/packages/volnix/paginate) [![Latest Stable Version](https://poser.pugx.org/volnix/paginate/v/stable.png)](https://packagist.org/packages/volnix/paginate)
+[![Build Status](https://travis-ci.org/volnix/paginate.png?branch=master)](https://travis-ci.org/volnix/paginate) [![Coverage Status](https://coveralls.io/repos/volnix/paginate/badge.png)](https://coveralls.io/r/volnix/paginate) [![Total Downloads](https://poser.pugx.org/volnix/paginate/downloads.png)](https://packagist.org/packages/volnix/paginate) [![Latest Stable Version](https://poser.pugx.org/volnix/paginate/v/stable.png)](https://packagist.org/packages/volnix/paginate)
 
 Paginate is a dead-simple pagination data-model.  It holds metadata about your pagination system and also the current state of pagination at any given time.  It is useful for use in models for server-side pagination, views for client-side pagination building, and everywhere in between.
 
