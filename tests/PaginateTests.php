@@ -114,4 +114,51 @@ class PaginateTests extends \PHPUnit_Framework_TestCase {
 	{
 		$pager = (new \Volnix\Paginate\Pager)->paginate(10, 2);
 	}
+
+	public function testGetDataAsArray()
+	{
+		$data = (new \Volnix\Paginate\Pager)->paginate(10)->toArray();
+		$this->assertTrue(is_array($data));
+		$this->assertEquals($data['prev'], 1);
+		$this->assertEquals($data['next'], 1);
+		$this->assertEquals($data['skip'], 0);
+		$this->assertEquals($data['min'], 1);
+		$this->assertEquals($data['max'], 1);
+
+		$data = (new \Volnix\Paginate\Pager)->paginate(100, 2)->toArray();
+		$this->assertTrue(is_array($data));
+		$this->assertEquals($data['prev'], 1);
+		$this->assertEquals($data['next'], 2);
+		$this->assertEquals($data['skip'], 50);
+		$this->assertEquals($data['min'], 1);
+		$this->assertEquals($data['max'], 2);
+	}
+
+	public function testGetDataAsJson()
+	{
+		$json = (new \Volnix\Paginate\Pager)->paginate(10)->toJson();
+		$this->assertTrue(is_string($json));
+
+		$data = json_decode($json);
+		$this->assertTrue(is_object($data));
+		$this->assertEquals($data->prev, 1);
+		$this->assertEquals($data->next, 1);
+		$this->assertEquals($data->skip, 0);
+		$this->assertEquals($data->min, 1);
+		$this->assertEquals($data->max, 1);
+
+		ob_start();
+		print (new \Volnix\Paginate\Pager)->paginate(10);
+		$json = ob_get_clean();
+
+		$this->assertTrue(is_string($json));
+
+		$data = json_decode($json);
+		$this->assertTrue(is_object($data));
+		$this->assertEquals($data->prev, 1);
+		$this->assertEquals($data->next, 1);
+		$this->assertEquals($data->skip, 0);
+		$this->assertEquals($data->min, 1);
+		$this->assertEquals($data->max, 1);
+	}
 }

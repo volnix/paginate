@@ -90,24 +90,19 @@ $pager = (new \Volnix\Paginate\Pager)->setConfig(5, 5, 'foo')->paginate(100);
 
 ```
 
+## API Pagination
+
+Paginate can return an array or JSON containing pertinent information for API pagination.  These fields are returned in both formats:
+
+- `current`: the current page
+- `prev`: the previous page (equal to the minimum page if at the low end of pagination)
+- `next`: the next page (equal to the maximum page if at the upper end of pagination)
+- `skip`: the query skip
+- `min`: the minimum page
+- `max`: the maxmimum page
+
+> **Note:** `prev` and `next` will both be equal to 1 if there is no pagination
+
 ## Extending Paginate
 
-This library is meant to be extended.  Once you have your basic pagination information, it is possible to build up server-side, client-side, etc. pagination in whatever ORM or javascript library you use in your project.  I have provided a simple example in the class of pagination HTML that is rendered, but the possibilities are endless:
-
-In your model/controller/wherever:
-
-```php
-
-$pager = (new \Volnix\Paginate\Pager)->paginate(1000, 5);
-
-```
-
-In your view:
-
-```php
-
-<div id="pagination-block">
-	<?= $pager->getHTMLPagination('pagination', $base_url) ?>
-</div>
-
-```
+This library is meant to be extended.  Once you have your basic pagination information, it is possible to build up server-side, client-side, etc. pagination in whatever ORM or javascript library you use in your project.

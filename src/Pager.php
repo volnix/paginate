@@ -46,39 +46,6 @@ class Pager {
 	}
 
 	/**
-	 * Get an HTML version of the pagination.  This is really meant to be over-ridden in your custom extension, but I've put a Twitter Bootstrap compatible boilerplate here for an example.
-	 *
-	 * @param string $class The name of a class to use to override the default
-	 * @param type $base_url The base URL to prefix your links
-	 * @return string The markup to render
-	 */
-	public function getHTMLPagination($class = "pagination", $base_url = "")
-	{
-		$markup = '';
-		if ($this->paginate) {
-
-			$markup .= sprintf('<ul class="%s">', $class);
-			if ($this->current_page != $this->min_page) {
-				$markup .= sprintf('<li><a href="%s">&laquo;</a></li>', sprintf('%spage=%d', $base_url, $this->min_page));
-			}
-
-			for($i = $this->low_page; $i <= $this->high_page; $i++) {
-				$markup .= sprintf('<li%s><a href="%s">%d</a></li>',
-						($i == $this->current_page ? ' class="active"' : ''),
-						sprintf('%spage=%d', $base_url, $i),
-						$i);
-
-			}
-
-			if ($this->current_page != $this->max_page) {
-				$markup .= sprintf('<li><a href="%s">&raquo;</a></li>', sprintf('%spage=%d', $base_url, $this->max_page));
-			}
-		}
-
-		return $markup;
-	}
-
-	/**
 	 * Actually set the current pagination state
 	 *
 	 * @param type $result_count Number of results to paginate for
@@ -124,5 +91,40 @@ class Pager {
 		$this->page_range = $page_range ?: self::DEFAULT_PAGE_RANGE;
 
 		return $this;
+	}
+
+	/**
+	 * Get all the pertinent data in array form.  Useful for API pagination, etc.
+	 *
+	 * Returns current page, previous page, next page, query skip, minimum page, maximum page.
+	 *
+	 * @return array
+	 */
+	public function toArray()
+	{
+		$data = [
+			'current' => $this->current_page,
+			'prev' => ($this->current_page - 1 >= $this->min_page ? $this->current_page - 1 : $this->min_page),
+			'next' => ($this->current_page + 1 <= $this->max_page ? $this->current_page + 1 : $this->max_page),
+			'skip' => $this->query_skip,
+			'min' => $this->min_page,
+			'max' => $this->max_page
+		];
+
+		return $data;
+	}
+
+	/**
+	 * Returns a json version of the toArray function.
+	 *
+	 * @return string
+	 */
+	public function toJson()
+	{
+		return json_encode($this->toArray());
+	}
+
+	public function __toString() {
+		return $this->toJson();
 	}
 }
